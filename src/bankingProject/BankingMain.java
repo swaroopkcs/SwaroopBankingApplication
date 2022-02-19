@@ -46,9 +46,7 @@ public class BankingMain {
 						standardProcess.withdraw();
 						break;
 					case 3:
-						System.out.println("Please enter the ampunt that you want to transfer");
-						int transferAmount = sc.nextInt();
-						standardProcess.fundTransfer(transferAmount);
+						standardProcess.fundTransfer();
 						break;
 					case 4:
 						String choice = "";
@@ -84,6 +82,7 @@ public class BankingMain {
 
 		}
 		System.out.println("Thank you for using the application");
+		sc.close();
 	}
 
 }

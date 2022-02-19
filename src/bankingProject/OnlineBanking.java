@@ -27,6 +27,7 @@ public class OnlineBanking extends BankingRules implements StandardProcess{
 					accountDetails.setBalance(newBalance);
 					System.out.println("Hello " + accountDetails.getName() + " The new balance on the account is "
 							+ accountDetails.getBalance());
+					break;
 				} else {
 					System.out.println("The maximum limit of withdrawal is 500");
 					System.out.println("Press y if you want to try another amount.");
@@ -43,15 +44,31 @@ public class OnlineBanking extends BankingRules implements StandardProcess{
 	}
 
 	@Override
-	public void fundTransfer(int transferReq) {
-		if (fundTransferAllowed(transferReq)) {
-			double newBalance = accountDetails.getBalance()-transferReq;
-			accountDetails.setBalance(newBalance);
-			System.out.println("Hello "+accountDetails.getName()+" The new balance on the account is "
-					+ accountDetails.getBalance());
-		}else {
-			System.out.println("The maximum limit of fund transfer is 500");
-		}
+	public void fundTransfer() {
+		String choiceToTryAgain = "";
+		int deposit;
+		do {
+			System.out.println("Please enter the amount that you want to transfer");
+			int transferAmount = sc.nextInt();
+			if (transferAmount <= accountDetails.getBalance()) {
+				if (fundTransferAllowed(transferAmount)) {
+					double newBalance = accountDetails.getBalance() - transferAmount;
+					accountDetails.setBalance(newBalance);
+					System.out.println("Hello " + accountDetails.getName() + " The new balance on the account is "
+							+ accountDetails.getBalance());
+					break;
+				} else {
+					System.out.println("The maximum limit of fund transfer is 500");
+					System.out.println("Press y if you want to try another amount.");
+					choiceToTryAgain = sc.next();
+				}
+			} else {
+				System.out.println("You don't have enough funds available. Please deposit funds.");
+				System.out.println("Please enter the amount that you want to deposit.");
+				deposit = sc.nextInt();
+				deposit(deposit);
+			}
+		} while (choiceToTryAgain.equals("y") || choiceToTryAgain.equals("Y"));
 		
 	}
 
