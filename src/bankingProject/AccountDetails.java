@@ -64,7 +64,9 @@ public class AccountDetails {
 	public void setPassword(String password) {
 		if (password.contains("&") || password.contains("@") || password.contains("$")) {
 			System.out.println("Password cannot contain the characters &, @ or $");
+			System.out.println("Password cannot be set");
 		} else {
+			System.out.println("Your password has been set");
 			this.password = password;
 		}
 	}
