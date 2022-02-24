@@ -7,6 +7,8 @@ public class AccountDetails {
 	private String password = "xyz4567";
 	private String name = "User1";
 	private double balance = 5431.24;
+	String verId = "";
+	String verPass = "";
 	
 
 	public double getBalance() {
@@ -38,7 +40,13 @@ public class AccountDetails {
 	}
 
 	public void setPin(String pin) {
-		this.pin = pin;
+		if (pin.length() == 4) {
+			this.pin = pin;
+		} else if (pin.length() < 4) {
+			System.out.println("The new PIN cannot be less than 4 digits");
+		} else {
+			System.out.println("The new PIN cannot be more than 4 digits");
+		}
 	}
 
 	public String getUsername() {
@@ -54,7 +62,11 @@ public class AccountDetails {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		if (password.contains("&") || password.contains("@") || password.contains("$")) {
+			System.out.println("Password cannot contain the characters &, @ or $");
+		} else {
+			this.password = password;
+		}
 	}
 
 }

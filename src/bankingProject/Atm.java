@@ -7,14 +7,13 @@ public class Atm extends BankingRules implements StandardProcess {
 	boolean verifyCredentials;
 	Scanner sc = new Scanner(System.in);
 
-	AccountDetails accountDetails = new AccountDetails();
 
 	@Override
 	public void deposit(int depositMade) {
-		newBalance = depositMade+accountDetails.getBalance();
-		accountDetails.setBalance(newBalance);
-		System.out.println("Hello " + accountDetails.getName() + " The new balance on the account is "
-				+ accountDetails.getBalance());
+		newBalance = depositMade+getBalance();
+		setBalance(newBalance);
+		System.out.println("Hello " + getName() + " The new balance on the account is "
+				+ getBalance());
 	}
 
 	@Override
@@ -24,12 +23,12 @@ public class Atm extends BankingRules implements StandardProcess {
 		do {
 			System.out.println("Please enter the amount that you want to withdraw");
 			int withdrawAmount = sc.nextInt();
-			if (withdrawAmount <= accountDetails.getBalance()) {
+			if (withdrawAmount <= getBalance()) {
 				if (withdrawalLimit(withdrawAmount)) {
-					double newBalance = accountDetails.getBalance() - withdrawAmount;
-					accountDetails.setBalance(newBalance);
-					System.out.println("Hello " + accountDetails.getName() + " The new balance on the account is "
-							+ accountDetails.getBalance());
+					double newBalance = getBalance() - withdrawAmount;
+					setBalance(newBalance);
+					System.out.println("Hello " + getName() + " The new balance on the account is "
+							+ getBalance());
 					break;
 				} else {
 					System.out.println("The maximum limit of withdrawal is 500");
@@ -53,12 +52,12 @@ public class Atm extends BankingRules implements StandardProcess {
 		do {
 			System.out.println("Please enter the amount that you want to transfer");
 			int transferAmount = sc.nextInt();
-			if (transferAmount <= accountDetails.getBalance()) {
+			if (transferAmount <= getBalance()) {
 				if (fundTransferAllowed(transferAmount)) {
-					double newBalance = accountDetails.getBalance() - transferAmount;
-					accountDetails.setBalance(newBalance);
-					System.out.println("Hello " + accountDetails.getName() + " The new balance on the account is "
-							+ accountDetails.getBalance());
+					double newBalance = getBalance() - transferAmount;
+					setBalance(newBalance);
+					System.out.println("Hello " + getName() + " The new balance on the account is "
+							+ getBalance());
 					break;
 				} else {
 					System.out.println("The maximum limit of fund transfer is 500");
@@ -83,7 +82,7 @@ public class Atm extends BankingRules implements StandardProcess {
 
 	@Override
 	public boolean userIdentification(String verId, String passOrPin) {
-		if (verId.equals(accountDetails.getAccountNumber())&&passOrPin.equals(accountDetails.getPin())) {
+		if (verId.equals(getAccountNumber())&&passOrPin.equals(getPin())) {
 			return true;
 		}
 		return false;

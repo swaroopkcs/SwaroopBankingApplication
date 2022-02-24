@@ -1,8 +1,8 @@
 package bankingProject;
 
-public abstract class BankingRules {
+public abstract class BankingRules extends AccountDetails implements StandardProcess{
 
-	AccountDetails accountDetails = new AccountDetails();
+	
 	double newBalance;
 
 	public boolean withdrawalLimit(int withdrawAmount) {
@@ -20,7 +20,7 @@ public abstract class BankingRules {
 		return false;
 	}
 
-	public boolean pinChange(String newPin1, String newPin2) {
+	public boolean verPassChange(String newPin1, String newPin2) {
 		if (newPin1.equals(newPin2)) {
 			return true;
 		}
